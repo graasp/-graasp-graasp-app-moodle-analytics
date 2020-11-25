@@ -1,8 +1,8 @@
-import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
-import ReduxThunk from 'redux-thunk';
-import ReduxPromise from 'redux-promise';
-import reducers from '../reducers';
+import { createStore, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'
+import ReduxThunk from 'redux-thunk'
+import ReduxPromise from 'redux-promise'
+import reducers from '../reducers'
 
 /**
  * configures the store and returns it along with the history for the router
@@ -14,11 +14,11 @@ const configure = (state) => {
   const store = createStore(
     reducers,
     state,
-    composeWithDevTools(applyMiddleware(ReduxThunk, ReduxPromise)),
-  );
+    composeWithDevTools(applyMiddleware(ReduxThunk, ReduxPromise))
+  )
   return {
-    store,
-  };
-};
+    store
+  }
+}
 
-export default configure;
+export default configure

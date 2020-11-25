@@ -1,7 +1,7 @@
-import { makeMultiGetter, makeMultiReducer } from 'dextrous';
-import chartData from './chartData';
+import { makeMultiGetter, makeMultiReducer } from 'dextrous'
+import chartData from './chartData'
 
-const chartDataById = makeMultiReducer(chartData);
-export default chartDataById;
+const chartDataById = makeMultiReducer(chartData)
+export default chartDataById
 
-export const getComponentById = makeMultiGetter(chartData);
+export const getComponentById = makeMultiGetter(chartData)

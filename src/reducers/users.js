@@ -1,15 +1,15 @@
 import {
   FLAG_GETTING_USERS,
   GET_USERS_FAILED,
-  GET_USERS_SUCCEEDED,
-} from '../types';
-import { showErrorToast } from '../utils/toasts';
+  GET_USERS_SUCCEEDED
+} from '../types'
+import { showErrorToast } from '../utils/toasts'
 
 const INITIAL_STATE = {
   content: [],
   // array of flags to keep track of various actions
-  activity: [],
-};
+  activity: []
+}
 
 export default (state = INITIAL_STATE, { payload, type }) => {
   switch (type) {
@@ -19,22 +19,22 @@ export default (state = INITIAL_STATE, { payload, type }) => {
         // when true append to array, when false, pop from it
         activity: payload
           ? [...state.activity, payload]
-          : [...state.activity.slice(1)],
-      };
+          : [...state.activity.slice(1)]
+      }
 
     case GET_USERS_SUCCEEDED:
       return {
         // we do not want to mutate the state object, so we destructure it here
         ...state,
-        content: payload,
-      };
+        content: payload
+      }
 
     case GET_USERS_FAILED:
       // show error to user
-      showErrorToast(payload);
-      return state;
+      showErrorToast(payload)
+      return state
 
     default:
-      return state;
+      return state
   }
-};
+}

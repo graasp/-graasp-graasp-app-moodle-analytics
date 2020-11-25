@@ -1,16 +1,16 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Grid from '@material-ui/core/Grid';
-import PropTypes from 'prop-types';
+import React from 'react'
+import { withStyles } from '@material-ui/core/styles'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import Grid from '@material-ui/core/Grid'
+import PropTypes from 'prop-types'
 
 const styles = (theme) => ({
   root: {
     textAlign: 'center',
     flex: 1,
-    margin: theme.spacing(4),
-  },
-});
+    margin: theme.spacing(4)
+  }
+})
 
 const Loader = ({ classes }) => (
   <Grid container spacing={0}>
@@ -18,12 +18,12 @@ const Loader = ({ classes }) => (
       <CircularProgress />
     </Grid>
   </Grid>
-);
+)
 
 Loader.propTypes = {
-  classes: PropTypes.shape({ root: PropTypes.string }).isRequired,
-};
+  classes: PropTypes.shape({ root: PropTypes.string }).isRequired
+}
 
-const StyledComponent = withStyles(styles)(Loader);
+const StyledComponent = withStyles(styles)(Loader)
 
-export default StyledComponent;
+export default StyledComponent

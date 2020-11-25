@@ -1,2 +1,2 @@
-export * from './componentsId';
-export * from './attributes';
+export * from './componentsId'
+export * from './attributes'

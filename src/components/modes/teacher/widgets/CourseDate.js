@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-import Weeks from './containers/Weeks';
+import Weeks from './containers/Weeks'
 
 const CourseDate = () => {
-  return <Weeks />;
-};
+  return <Weeks />
+}
 
-export default CourseDate;
+export default CourseDate

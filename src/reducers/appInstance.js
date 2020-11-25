@@ -1,26 +1,26 @@
-import _ from 'lodash';
+import _ from 'lodash'
 import {
   GET_APP_INSTANCE_FAILED,
   GET_APP_INSTANCE_SUCCEEDED,
   PATCH_APP_INSTANCE_FAILED,
   PATCH_APP_INSTANCE_SUCCEEDED,
   FLAG_PATCHING_APP_INSTANCE,
-  FLAG_GETTING_APP_INSTANCE,
-} from '../types';
-import { showErrorToast } from '../utils/toasts';
+  FLAG_GETTING_APP_INSTANCE
+} from '../types'
+import { showErrorToast } from '../utils/toasts'
 
 const DEFAULT_SETTINGS = {
-  headerVisible: false,
-};
+  headerVisible: false
+}
 
 const INITIAL_STATE = {
   content: {
-    settings: DEFAULT_SETTINGS,
+    settings: DEFAULT_SETTINGS
   },
   ready: false,
   // array of flags to keep track of various actions
-  activity: [],
-};
+  activity: []
+}
 
 export default (state = INITIAL_STATE, { payload, type }) => {
   switch (type) {
@@ -31,8 +31,8 @@ export default (state = INITIAL_STATE, { payload, type }) => {
         // when true append to array, when false, pop from it
         activity: payload
           ? [...state.activity, payload]
-          : [...state.activity.slice(1)],
-      };
+          : [...state.activity.slice(1)]
+      }
 
     case GET_APP_INSTANCE_SUCCEEDED:
     case PATCH_APP_INSTANCE_SUCCEEDED:
@@ -42,26 +42,26 @@ export default (state = INITIAL_STATE, { payload, type }) => {
           ...state,
           content: {
             ...state.content,
-            settings: DEFAULT_SETTINGS,
+            settings: DEFAULT_SETTINGS
           },
           // mark instance as ready
-          ready: true,
-        };
+          ready: true
+        }
       }
       return {
         ...state,
         content: payload,
         // mark instance as ready
-        ready: true,
-      };
+        ready: true
+      }
 
     case PATCH_APP_INSTANCE_FAILED:
     case GET_APP_INSTANCE_FAILED:
       // show error to user
-      showErrorToast(payload);
-      return state;
+      showErrorToast(payload)
+      return state
 
     default:
-      return state;
+      return state
   }
-};
+}

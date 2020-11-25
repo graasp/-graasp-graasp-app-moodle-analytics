@@ -1,10 +1,10 @@
-import { UPDATE_CHART_LEGEND_BY_ID } from '../types';
+import { UPDATE_CHART_LEGEND_BY_ID } from '../types'
 
 const updateLegendById = (payload = [], id) => (dispatch) =>
   dispatch({
     type: UPDATE_CHART_LEGEND_BY_ID,
     payload,
-    key: id,
-  });
+    key: id
+  })
 
-export default updateLegendById;
+export default updateLegendById

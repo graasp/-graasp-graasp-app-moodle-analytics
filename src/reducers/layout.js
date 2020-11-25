@@ -1,10 +1,10 @@
-import { OPEN_SETTINGS, CLOSE_SETTINGS } from '../types';
+import { OPEN_SETTINGS, CLOSE_SETTINGS } from '../types'
 
 const INITIAL_STATE = {
   settings: {
-    open: false,
-  },
-};
+    open: false
+  }
+}
 
 export default (state = INITIAL_STATE, { type }) => {
   switch (type) {
@@ -13,18 +13,18 @@ export default (state = INITIAL_STATE, { type }) => {
         ...state,
         settings: {
           ...state.settings,
-          open: true,
-        },
-      };
+          open: true
+        }
+      }
     case CLOSE_SETTINGS:
       return {
         ...state,
         settings: {
           ...state.settings,
-          open: false,
-        },
-      };
+          open: false
+        }
+      }
     default:
-      return state;
+      return state
   }
-};
+}

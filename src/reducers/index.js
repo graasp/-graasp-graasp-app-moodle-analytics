@@ -1,12 +1,12 @@
-import { combineReducers } from 'redux';
-import context from './context';
-import appInstanceResources from './appInstanceResources';
-import users from './users';
-import appInstance from './appInstance';
-import layout from './layout';
-import action from './action';
-import chartDataById from './chartDataById';
-import windowSize from './windowSize';
+import { combineReducers } from 'redux'
+import context from './context'
+import appInstanceResources from './appInstanceResources'
+import users from './users'
+import appInstance from './appInstance'
+import layout from './layout'
+import action from './action'
+import chartDataById from './chartDataById'
+import windowSize from './windowSize'
 
 export default combineReducers({
   // keys should always be lowercase
@@ -17,5 +17,5 @@ export default combineReducers({
   layout,
   action,
   chartDataById,
-  windowSize,
-});
+  windowSize
+})

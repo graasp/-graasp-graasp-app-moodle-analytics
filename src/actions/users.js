@@ -1,59 +1,59 @@
-import { flag, getApiContext, isErrorResponse, postMessage } from './common';
+import { flag, getApiContext, isErrorResponse, postMessage } from './common'
 import {
   FLAG_GETTING_USERS,
   GET_USERS,
   GET_USERS_FAILED,
-  GET_USERS_SUCCEEDED,
-} from '../types';
+  GET_USERS_SUCCEEDED
+} from '../types'
 import {
   DEFAULT_GET_REQUEST,
   SPACES_ENDPOINT,
-  USERS_ENDPOINT,
-} from '../config/api';
+  USERS_ENDPOINT
+} from '../config/api'
 
-const flagGettingUsers = flag(FLAG_GETTING_USERS);
+const flagGettingUsers = flag(FLAG_GETTING_USERS)
 
 const getUsers = async () => async (dispatch, getState) => {
-  dispatch(flagGettingUsers(true));
+  dispatch(flagGettingUsers(true))
   try {
-    const { spaceId, apiHost, offline, standalone } = getApiContext(getState);
+    const { spaceId, apiHost, offline, standalone } = getApiContext(getState)
 
     // if standalone, you cannot connect to api
     if (standalone) {
-      return false;
+      return false
     }
 
     // if offline send message to parent requesting resources
     if (offline) {
       return postMessage({
-        type: GET_USERS,
-      });
+        type: GET_USERS
+      })
     }
 
-    const url = `//${apiHost + SPACES_ENDPOINT}/${spaceId}/${USERS_ENDPOINT}`;
+    const url = `//${apiHost + SPACES_ENDPOINT}/${spaceId}/${USERS_ENDPOINT}`
 
-    const response = await fetch(url, DEFAULT_GET_REQUEST);
+    const response = await fetch(url, DEFAULT_GET_REQUEST)
 
     // throws if it is an error
-    await isErrorResponse(response);
+    await isErrorResponse(response)
 
-    const users = response.json();
+    const users = response.json()
     return dispatch({
       type: GET_USERS_SUCCEEDED,
-      payload: users,
-    });
+      payload: users
+    })
   } catch (err) {
     return dispatch({
       type: GET_USERS_FAILED,
-      payload: err,
-    });
+      payload: err
+    })
   } finally {
-    dispatch(flagGettingUsers(false));
+    dispatch(flagGettingUsers(false))
   }
-};
+}
 
 export {
   // todo: remove when more exports are here
   // eslint-disable-next-line import/prefer-default-export
-  getUsers,
-};
+  getUsers
+}

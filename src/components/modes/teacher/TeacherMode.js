@@ -31,14 +31,21 @@ class TeacherMode extends Component {
     dispatchGetActions()
   }
 
-  componentDidUpdate({ appInstanceId: prevAppInstanceId }) {
+  componentDidUpdate({
+    appInstanceId: prevAppInstanceId,
+    appInstanceResourceId: prevAppInstanceResourceId
+  }) {
     const {
       appInstanceId,
       dispatchGetAppInstanceResources,
-      dispatchGetActions
+      dispatchGetActions,
+      appInstanceResourceId
     } = this.props
     // handle receiving the app instance id
-    if (appInstanceId !== prevAppInstanceId) {
+    if (
+      appInstanceId !== prevAppInstanceId ||
+      prevAppInstanceResourceId !== appInstanceResourceId
+    ) {
       dispatchGetAppInstanceResources()
       dispatchGetActions()
     }
@@ -57,8 +64,9 @@ class TeacherMode extends Component {
     }
   }
 }
-const mapStateToProps = ({ appInstanceResources }) => ({
-  activity: Boolean(appInstanceResources.activity.length)
+const mapStateToProps = ({ appInstanceResources, context }) => ({
+  activity: Boolean(appInstanceResources.activity.length),
+  appInstanceResourceId: context?.appInstanceResourceId
 })
 
 const mapDispatchToProps = {

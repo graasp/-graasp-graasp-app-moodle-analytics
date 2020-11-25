@@ -3,15 +3,15 @@ import {
   FLAG_POSTING_ACTION,
   GET_ACTIONS_FAILED,
   GET_ACTIONS_SUCCEEDED,
-  POST_ACTION_FAILED,
-} from '../types';
-import { showErrorToast } from '../utils/toasts';
+  POST_ACTION_FAILED
+} from '../types'
+import { showErrorToast } from '../utils/toasts'
 
 const INITIAL_STATE = {
   ready: false,
   activity: [],
-  content: [],
-};
+  content: []
+}
 
 export default (state = INITIAL_STATE, { type, payload }) => {
   switch (type) {
@@ -22,19 +22,19 @@ export default (state = INITIAL_STATE, { type, payload }) => {
         // when true append to array, when false, pop from it
         activity: payload
           ? [...state.activity, payload]
-          : [...state.activity.slice(1)],
-      };
+          : [...state.activity.slice(1)]
+      }
     case GET_ACTIONS_SUCCEEDED:
       return {
         ...state,
         content: payload,
-        ready: true,
-      };
+        ready: true
+      }
     case GET_ACTIONS_FAILED:
     case POST_ACTION_FAILED:
-      showErrorToast(payload);
-      return state;
+      showErrorToast(payload)
+      return state
     default:
-      return state;
+      return state
   }
-};
+}

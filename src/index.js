@@ -4,8 +4,6 @@ import Root from './components/Root'
 import configureStore from './store/configureStore'
 import './index.css'
 
-const { store, history } = configureStore()
-
 const renderApp = (RootComponent, store, history, context) => {
   return (
     <Provider store={store}>
@@ -14,6 +12,8 @@ const renderApp = (RootComponent, store, history, context) => {
   )
 }
 
-export default ({ context }) => {
+// eslint-disable-next-line import/prefer-default-export
+export const Analytics = ({ context }) => {
+  const { store, history } = configureStore()
   return renderApp(Root, store, history, context)
 }

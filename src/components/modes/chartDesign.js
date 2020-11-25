@@ -1,19 +1,19 @@
 export const xTickValues = (values, tickCount) => {
-  const temp = [];
-  const l = values.length;
-  let step = l / tickCount;
-  step = Math.ceil(step);
+  const temp = []
+  const l = values.length
+  let step = l / tickCount
+  step = Math.ceil(step)
   if (l > tickCount) {
     if (step > 0) {
       for (let i = 0; i < l; i += step) {
-        temp.push(values[i]);
+        temp.push(values[i])
       }
     }
 
-    return temp;
+    return temp
   }
-  return values;
-};
+  return values
+}
 
 // const tickValueY = data => {
 //   const Max = [];
@@ -31,9 +31,9 @@ export const xTickValues = (values, tickCount) => {
 //   return Array.from(Array(Math.max(...Max) + 1).keys());
 // };
 
-export const HEIGHT = 400;
-export const WIDTH = '100%';
-export const MARGIN = { top: 50, right: 110, bottom: 60, left: 60 };
+export const HEIGHT = 400
+export const WIDTH = '100%'
+export const MARGIN = { top: 50, right: 110, bottom: 60, left: 60 }
 export const X_AXIS = (legend, values, tickCount) => {
   if (values.length > 0) {
     return {
@@ -43,8 +43,8 @@ export const X_AXIS = (legend, values, tickCount) => {
       legend: `${legend}`,
       legendPosition: 'middle',
       legendOffset: 45,
-      tickValues: xTickValues(values, tickCount),
-    };
+      tickValues: xTickValues(values, tickCount)
+    }
   }
   return {
     tickSize: 5,
@@ -52,9 +52,9 @@ export const X_AXIS = (legend, values, tickCount) => {
     tickRotation: 0,
     legend: `${legend}`,
     legendPosition: 'middle',
-    legendOffset: 45,
-  };
-};
+    legendOffset: 45
+  }
+}
 
 export const Y_AXIS = (legend, data) => {
   if (legend && data) {
@@ -65,9 +65,9 @@ export const Y_AXIS = (legend, data) => {
       tickRotation: 0,
       legend: `${legend}`,
       legendOffset: -40,
-      legendPosition: 'middle',
+      legendPosition: 'middle'
       // tickValues: tickValueY(data),
-    };
+    }
   }
   return {
     orient: 'left',
@@ -76,6 +76,6 @@ export const Y_AXIS = (legend, data) => {
     tickRotation: 0,
     legend: `${legend}`,
     legendOffset: -40,
-    legendPosition: 'middle',
-  };
-};
+    legendPosition: 'middle'
+  }
+}

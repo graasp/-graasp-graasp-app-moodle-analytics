@@ -1,19 +1,19 @@
-import React from 'react';
-import Helmet from 'react-helmet';
+import React from 'react'
+import Helmet from 'react-helmet'
 
-import DayPicker from 'react-day-picker';
-import 'react-day-picker/lib/style.css';
+import DayPicker from 'react-day-picker'
+import 'react-day-picker/lib/style.css'
 
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
-import Loader from '../../../../common/Loader';
+import Loader from '../../../../common/Loader'
 
 const Calendar = ({ date }) => {
-  const d = new Date(date);
+  const d = new Date(date)
 
   const modifiers = {
-    creationDay: d,
-  };
+    creationDay: d
+  }
 
   if (date) {
     return (
@@ -30,14 +30,14 @@ const Calendar = ({ date }) => {
         </Helmet>
         <DayPicker numberOfMonths={4} from={d} modifiers={modifiers} />
       </div>
-    );
+    )
   }
 
-  return <Loader />;
-};
+  return <Loader />
+}
 
 Calendar.propTypes = {
-  date: PropTypes.instanceOf(Date).isRequired,
-};
+  date: PropTypes.instanceOf(Date).isRequired
+}
 
-export default Calendar;
+export default Calendar

@@ -1,217 +1,217 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, connect } from 'react-redux';
-import Helmet from 'react-helmet';
-import PropTypes from 'prop-types';
-import DayPicker, { DateUtils } from 'react-day-picker';
-import TextField from '@material-ui/core/TextField';
-import Popover from '@material-ui/core/Popover';
-import Button from '@material-ui/core/Button';
-import Box from '@material-ui/core/Box';
-import UndoIcon from '@material-ui/icons/Undo';
-import RedoIcon from '@material-ui/icons/Redo';
-import IconButton from '@material-ui/core/IconButton';
-import Divider from '@material-ui/core/Divider';
-import moment from 'moment';
-import updateDateById from '../../actions/chartDataByID';
-import 'react-day-picker/lib/style.css';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, connect } from 'react-redux'
+import Helmet from 'react-helmet'
+import PropTypes from 'prop-types'
+import DayPicker, { DateUtils } from 'react-day-picker'
+import TextField from '@material-ui/core/TextField'
+import Popover from '@material-ui/core/Popover'
+import Button from '@material-ui/core/Button'
+import Box from '@material-ui/core/Box'
+import UndoIcon from '@material-ui/icons/Undo'
+import RedoIcon from '@material-ui/icons/Redo'
+import IconButton from '@material-ui/core/IconButton'
+import Divider from '@material-ui/core/Divider'
+import moment from 'moment'
+import updateDateById from '../../actions/chartDataByID'
+import 'react-day-picker/lib/style.css'
 import {
   combineContents,
   fromDate,
-  toDate,
-} from '../modes/teacher/widgets/util/common';
-import { DATE_FORMAT_SHORT_YEAR } from '../../config/settings';
+  toDate
+} from '../modes/teacher/widgets/util/common'
+import { DATE_FORMAT_SHORT_YEAR } from '../../config/settings'
 
 const KeyedDatePicker = ({ id, data, chartDataById }) => {
-  const dispatch = useDispatch();
-  const initialToday = new Date();
+  const dispatch = useDispatch()
+  const initialToday = new Date()
 
-  const [from, setFrom] = useState(initialToday);
-  const [fromPrev, setFromPrev] = useState(initialToday);
-  const [to, setTo] = useState(initialToday);
-  const [enteredTo, setEnteredTo] = useState(initialToday);
-  const [modifiers, setModifiers] = useState({ start: from, end: enteredTo });
+  const [from, setFrom] = useState(initialToday)
+  const [fromPrev, setFromPrev] = useState(initialToday)
+  const [to, setTo] = useState(initialToday)
+  const [enteredTo, setEnteredTo] = useState(initialToday)
+  const [modifiers, setModifiers] = useState({ start: from, end: enteredTo })
   const [selectedDays, setSelectedDays] = useState([
     from,
-    { from, to: enteredTo },
-  ]);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const PopId = open ? 'simple-popover' : undefined;
+    { from, to: enteredTo }
+  ])
+  const [anchorEl, setAnchorEl] = React.useState(null)
+  const open = Boolean(anchorEl)
+  const PopId = open ? 'simple-popover' : undefined
 
   useEffect(() => {
     // get date range from actions
     const dateRange = combineContents(data)?.map((action) =>
-      moment(action.timecreated),
-    );
+      moment(action.timecreated)
+    )
     if (dateRange?.length) {
-      setFrom(moment.min(dateRange).toDate());
-      setTo(moment.max(dateRange).toDate());
+      setFrom(moment.min(dateRange).toDate())
+      setTo(moment.max(dateRange).toDate())
     }
-  }, [data]);
+  }, [data])
 
   useEffect(() => {
     if (from !== null) {
-      setFromPrev(from);
+      setFromPrev(from)
     }
 
     // check on date change
-    const prevFrom = fromDate(chartDataById, id);
-    const prevTo = toDate(chartDataById, id);
+    const prevFrom = fromDate(chartDataById, id)
+    const prevTo = toDate(chartDataById, id)
     if (from !== prevFrom || to !== prevTo) {
-      dispatch(updateDateById(from, to, id));
+      dispatch(updateDateById(from, to, id))
     }
-  }, [from, to]);
+  }, [from, to])
 
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
 
   const handleClose = () => {
-    setAnchorEl(null);
-  };
+    setAnchorEl(null)
+  }
 
   const isSelectingFirstDay = (fromD, toD, day) => {
-    const isBeforeFirstDay = fromD && DateUtils.isDayBefore(day, fromD);
-    const isRangeSelected = fromD && toD;
-    return !fromD || isBeforeFirstDay || isRangeSelected;
-  };
+    const isBeforeFirstDay = fromD && DateUtils.isDayBefore(day, fromD)
+    const isRangeSelected = fromD && toD
+    return !fromD || isBeforeFirstDay || isRangeSelected
+  }
 
   const setLastMonth = () => {
-    const today = new Date();
-    today.setHours(12, 0, 0, 0);
-    const lastMonth = new Date();
-    lastMonth.setDate(lastMonth.getDate() - 30);
-    setFrom(lastMonth);
-    setTo(today);
-    setEnteredTo(today);
-    dispatch(updateDateById(lastMonth, today, id));
-    handleClose();
-  };
+    const today = new Date()
+    today.setHours(12, 0, 0, 0)
+    const lastMonth = new Date()
+    lastMonth.setDate(lastMonth.getDate() - 30)
+    setFrom(lastMonth)
+    setTo(today)
+    setEnteredTo(today)
+    dispatch(updateDateById(lastMonth, today, id))
+    handleClose()
+  }
 
   const setLastWeek = () => {
-    const today = new Date();
-    today.setHours(12, 0, 0, 0);
-    const lastWeek = new Date();
-    lastWeek.setDate(lastWeek.getDate() - 6);
-    setFrom(lastWeek);
-    setTo(today);
-    setEnteredTo(today);
-    dispatch(updateDateById(lastWeek, today, id));
-    handleClose();
-  };
+    const today = new Date()
+    today.setHours(12, 0, 0, 0)
+    const lastWeek = new Date()
+    lastWeek.setDate(lastWeek.getDate() - 6)
+    setFrom(lastWeek)
+    setTo(today)
+    setEnteredTo(today)
+    dispatch(updateDateById(lastWeek, today, id))
+    handleClose()
+  }
 
   const setToday = () => {
-    const today = new Date();
-    today.setHours(12, 0, 0, 0);
-    setFrom(today);
-    setTo(today);
-    setEnteredTo(today);
-    setModifiers({ start: today, end: today });
-    setSelectedDays([today, { from: today, to: today }]);
-    dispatch(updateDateById(today, today, id));
-    handleClose();
-  };
+    const today = new Date()
+    today.setHours(12, 0, 0, 0)
+    setFrom(today)
+    setTo(today)
+    setEnteredTo(today)
+    setModifiers({ start: today, end: today })
+    setSelectedDays([today, { from: today, to: today }])
+    dispatch(updateDateById(today, today, id))
+    handleClose()
+  }
 
   const prevWeek = () => {
-    const newFrom = moment(from).subtract(7, 'days').toDate();
-    const newTo = moment(to).subtract(7, 'days').toDate();
-    setFrom(newFrom);
-    setTo(newTo);
-    dispatch(updateDateById(newFrom, newTo, id));
-    handleClose();
-  };
+    const newFrom = moment(from).subtract(7, 'days').toDate()
+    const newTo = moment(to).subtract(7, 'days').toDate()
+    setFrom(newFrom)
+    setTo(newTo)
+    dispatch(updateDateById(newFrom, newTo, id))
+    handleClose()
+  }
 
   const nextWeek = () => {
-    const newFrom = moment(from).add(7, 'days').toDate();
-    const newTo = moment(to).add(7, 'days').toDate();
-    setFrom(newFrom);
-    setTo(newTo);
-    dispatch(updateDateById(newFrom, newTo, id));
-    handleClose();
-  };
+    const newFrom = moment(from).add(7, 'days').toDate()
+    const newTo = moment(to).add(7, 'days').toDate()
+    setFrom(newFrom)
+    setTo(newTo)
+    dispatch(updateDateById(newFrom, newTo, id))
+    handleClose()
+  }
 
   const handleResetClick = () => {
-    setFrom(null);
-    setTo(null);
-    setEnteredTo(null);
-  };
+    setFrom(null)
+    setTo(null)
+    setEnteredTo(null)
+  }
 
   const handleDayClick = (day) => {
-    const today = new Date();
-    today.setHours(12, 0, 0, 0);
+    const today = new Date()
+    today.setHours(12, 0, 0, 0)
     if (day > today) {
-      return;
+      return
     }
     if (from && to && day >= from && day <= to) {
-      handleResetClick();
-      return;
+      handleResetClick()
+      return
     }
     if (isSelectingFirstDay(from, to, day)) {
-      setFrom(day);
-      setTo(null);
-      setEnteredTo(null);
+      setFrom(day)
+      setTo(null)
+      setEnteredTo(null)
     } else {
-      setTo(day);
-      setEnteredTo(day);
-      dispatch(updateDateById(from, day, id));
-      handleClose();
+      setTo(day)
+      setEnteredTo(day)
+      dispatch(updateDateById(from, day, id))
+      handleClose()
     }
-  };
+  }
 
   const handleDayMouseEnter = (day) => {
-    const today = new Date();
+    const today = new Date()
     if (from && to) {
-      return;
+      return
     }
 
     if (day > today) {
-      setEnteredTo(today);
-      return;
+      setEnteredTo(today)
+      return
     }
 
     if (!isSelectingFirstDay(from, to, day)) {
-      setEnteredTo(day);
+      setEnteredTo(day)
     }
-  };
+  }
 
   const toDateString = () => {
     if (to !== null) {
-      return moment(to).format(DATE_FORMAT_SHORT_YEAR);
+      return moment(to).format(DATE_FORMAT_SHORT_YEAR)
     }
-    return ' ';
-  };
+    return ' '
+  }
 
   const fromDateString = () => {
     if (from !== null) {
-      return moment(from).format(DATE_FORMAT_SHORT_YEAR);
+      return moment(from).format(DATE_FORMAT_SHORT_YEAR)
     }
-    return ' ';
-  };
+    return ' '
+  }
 
   const after = () => {
-    const today = new Date();
+    const today = new Date()
     if (to !== null) {
-      return to;
+      return to
     }
-    return today;
-  };
+    return today
+  }
   useEffect(() => {
-    setModifiers({ start: from, end: enteredTo });
-    setSelectedDays([from, { from, to: enteredTo }]);
-  }, [from, enteredTo]);
+    setModifiers({ start: from, end: enteredTo })
+    setSelectedDays([from, { from, to: enteredTo }])
+  }, [from, enteredTo])
 
   return (
     <div>
-      <Box display="flex" justifyContent="center" mt={2} mx={5} px={3} pb={3}>
+      <Box display='flex' justifyContent='center' mt={2} mx={5} px={3} pb={3}>
         <TextField
           aria-describedby={PopId}
-          label="From"
+          label='From'
           value={fromDateString()}
           onClick={handleClick}
         />
         <TextField
           aria-describedby={PopId}
-          label="To"
+          label='To'
           value={toDateString()}
           onClick={handleClick}
         />
@@ -223,23 +223,23 @@ const KeyedDatePicker = ({ id, data, chartDataById }) => {
         onClose={handleClose}
         anchorOrigin={{
           vertical: 'bottom',
-          horizontal: 'center',
+          horizontal: 'center'
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'center',
+          horizontal: 'center'
         }}
       >
         <div style={{ width: '100%' }}>
-          <Box display="flex">
+          <Box display='flex'>
             <Box mt={2} ml={1}>
               <Box
-                display="flex"
-                flexDirection="column"
+                display='flex'
+                flexDirection='column'
                 p={1}
                 m={1}
-                bgcolor="background.paper"
-                justifyContent="center"
+                bgcolor='background.paper'
+                justifyContent='center'
               >
                 <Button onClick={setToday}>Today</Button>
                 <Divider />
@@ -250,18 +250,18 @@ const KeyedDatePicker = ({ id, data, chartDataById }) => {
                 <Button onClick={setLastMonth}>Last Month</Button>
 
                 <Box
-                  display="flex"
-                  flexDirection="row"
+                  display='flex'
+                  flexDirection='row'
                   p={1}
                   mt={2}
-                  justifyContent="center"
-                  alignItems="center"
+                  justifyContent='center'
+                  alignItems='center'
                 >
-                  <IconButton aria-label="weekBefore" onClick={prevWeek}>
+                  <IconButton aria-label='weekBefore' onClick={prevWeek}>
                     <UndoIcon />
                   </IconButton>
                   Weeks
-                  <IconButton aria-label="weekAfter" onClick={nextWeek}>
+                  <IconButton aria-label='weekAfter' onClick={nextWeek}>
                     <RedoIcon />
                   </IconButton>
                 </Box>
@@ -270,12 +270,12 @@ const KeyedDatePicker = ({ id, data, chartDataById }) => {
             <Box p={1} flexGrow={1}>
               <DayPicker
                 month={fromPrev}
-                className="Range"
+                className='Range'
                 numberOfMonths={2}
                 selectedDays={selectedDays}
                 disabledDays={{
                   after: after(),
-                  before: from,
+                  before: from
                 }}
                 modifiers={modifiers}
                 onDayClick={handleDayClick}
@@ -319,25 +319,25 @@ const KeyedDatePicker = ({ id, data, chartDataById }) => {
         </div>
       </Popover>
     </div>
-  );
-};
+  )
+}
 
 KeyedDatePicker.propTypes = {
   id: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(PropTypes.shape({})),
-  chartDataById: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-};
+  chartDataById: PropTypes.arrayOf(PropTypes.shape({})).isRequired
+}
 
 KeyedDatePicker.defaultProps = {
-  data: null,
-};
+  data: null
+}
 
 const mapStateToProps = ({
   appInstanceResources: { content },
-  chartDataById,
+  chartDataById
 }) => ({
   data: content,
-  chartDataById,
-});
+  chartDataById
+})
 
-export default connect(mapStateToProps)(KeyedDatePicker);
+export default connect(mapStateToProps)(KeyedDatePicker)

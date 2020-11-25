@@ -1,5 +1,5 @@
-import { connect } from 'react-redux';
-import BarChart from '../components/BarChart';
+import { connect } from 'react-redux'
+import BarChart from '../components/BarChart'
 import {
   buildDateRange,
   combineContents,
@@ -7,9 +7,9 @@ import {
   toDate,
   createDataForBarChart,
   Occurrence,
-  fillDataForBarChartPerTarget,
-} from '../util';
-import { TARGET, VERB_LINE_CHART_DAY_PICKER_ID_PER_TARGET } from '../types';
+  fillDataForBarChartPerTarget
+} from '../util'
+import { TARGET, VERB_LINE_CHART_DAY_PICKER_ID_PER_TARGET } from '../types'
 
 const colors = {
   created: '#decaff',
@@ -19,11 +19,11 @@ const colors = {
   shown: '#decaff',
   ended: '#BBAAFF',
   updated: '#988BFF',
-  uploaded: '#756DF4',
-};
+  uploaded: '#756DF4'
+}
 
-const xAxis = TARGET;
-const yAxis = 'Occurrence';
+const xAxis = TARGET
+const yAxis = 'Occurrence'
 
 const allowedVerbs = [
   'created',
@@ -33,42 +33,42 @@ const allowedVerbs = [
   'ended',
   'updated',
   'shown',
-  'uploaded',
-];
+  'uploaded'
+]
 
 const allowedTargets = [
   'course',
   'course_module',
   'discussion',
-  'course_section',
-];
+  'course_section'
+]
 const VerbBarChartPerTarget = (content, from, to) => {
-  const dateRange = buildDateRange(from, to);
-  let data = combineContents(content);
-  const targetList = Occurrence(data, TARGET, allowedTargets);
+  const dateRange = buildDateRange(from, to)
+  let data = combineContents(content)
+  const targetList = Occurrence(data, TARGET, allowedTargets)
   const formattedData = createDataForBarChart(targetList, allowedVerbs, [
-    TARGET,
-  ]);
-  data = fillDataForBarChartPerTarget(data, formattedData, dateRange);
-  return data;
-};
+    TARGET
+  ])
+  data = fillDataForBarChartPerTarget(data, formattedData, dateRange)
+  return data
+}
 
 const mapStateToProps = ({
   appInstanceResources: { content },
-  chartDataById,
+  chartDataById
 }) => {
   return {
     data: VerbBarChartPerTarget(
       content,
       fromDate(chartDataById, VERB_LINE_CHART_DAY_PICKER_ID_PER_TARGET),
-      toDate(chartDataById, VERB_LINE_CHART_DAY_PICKER_ID_PER_TARGET),
+      toDate(chartDataById, VERB_LINE_CHART_DAY_PICKER_ID_PER_TARGET)
     ),
     keys: allowedVerbs,
     colors,
     indexBy: TARGET,
     xAxis,
-    yAxis,
-  };
-};
+    yAxis
+  }
+}
 
-export default connect(mapStateToProps)(BarChart);
+export default connect(mapStateToProps)(BarChart)

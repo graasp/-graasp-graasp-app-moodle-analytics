@@ -1,46 +1,46 @@
-import React, { useState } from 'react';
-import { ResponsiveBar } from '@nivo/bar';
-import PropTypes from 'prop-types';
-import { BoxLegendSvg } from '@nivo/legends';
-import _ from 'lodash';
-import Loader from '../../../../common/Loader';
-import { HEIGHT, MARGIN, WIDTH, X_AXIS, Y_AXIS } from '../../../chartDesign';
-import { getColorForScheme } from '../util';
+import React, { useState } from 'react'
+import { ResponsiveBar } from '@nivo/bar'
+import PropTypes from 'prop-types'
+import { BoxLegendSvg } from '@nivo/legends'
+import _ from 'lodash'
+import Loader from '../../../../common/Loader'
+import { HEIGHT, MARGIN, WIDTH, X_AXIS, Y_AXIS } from '../../../chartDesign'
+import { getColorForScheme } from '../util'
 
 const BarChart = ({ data, keys, indexBy, xAxis, yAxis, values, maxTicks }) => {
-  const [hiddenKeys, setHiddenKeys] = useState([]);
+  const [hiddenKeys, setHiddenKeys] = useState([])
 
   const colors = ({ id }) => {
-    return getColorForScheme(id, keys);
-  };
+    return getColorForScheme(id, keys)
+  }
 
   const toggle = (d) => {
-    let hidden = hiddenKeys;
+    let hidden = hiddenKeys
     if (hiddenKeys.includes(d.id)) {
-      hidden = hidden.filter((e) => e !== d.id);
-      setHiddenKeys(hidden);
+      hidden = hidden.filter((e) => e !== d.id)
+      setHiddenKeys(hidden)
     } else {
-      hidden = [...hidden, d.id];
-      hidden.sort((a, b) => (a > b ? 1 : -1));
-      setHiddenKeys(hidden);
+      hidden = [...hidden, d.id]
+      hidden.sort((a, b) => (a > b ? 1 : -1))
+      setHiddenKeys(hidden)
     }
-  };
+  }
 
   const customLegend = (d) => {
-    const { bars, height, width } = d;
+    const { bars, height, width } = d
 
     const keysProperties = keys
       .map((key) => {
-        const Obj = {};
-        Obj.id = key;
-        Obj.label = key;
-        Obj.fill = hiddenKeys.includes(key) ? 'grey' : colors({ id: key });
-        Obj.itemTextColor = 'white';
-        return Obj;
+        const Obj = {}
+        Obj.id = key
+        Obj.label = key
+        Obj.fill = hiddenKeys.includes(key) ? 'grey' : colors({ id: key })
+        Obj.itemTextColor = 'white'
+        return Obj
       })
-      .reverse(); // reverse to display legend from bottom to top
+      .reverse() // reverse to display legend from bottom to top
 
-    bars.sort((a, b) => (a.key > b.key ? 1 : -1));
+    bars.sort((a, b) => (a.key > b.key ? 1 : -1))
     const legend = {
       data: keysProperties,
       dataFrom: 'keys',
@@ -61,11 +61,11 @@ const BarChart = ({ data, keys, indexBy, xAxis, yAxis, values, maxTicks }) => {
           on: 'hover',
           style: {
             itemTextColor: '#000',
-            itemBackground: '#eee',
-          },
-        },
-      ],
-    };
+            itemBackground: '#eee'
+          }
+        }
+      ]
+    }
 
     return (
       <>
@@ -89,8 +89,8 @@ const BarChart = ({ data, keys, indexBy, xAxis, yAxis, values, maxTicks }) => {
           containerWidth={width}
         />
       </>
-    );
-  };
+    )
+  }
 
   if (data.length > 0 && keys && colors && indexBy) {
     return (
@@ -102,7 +102,7 @@ const BarChart = ({ data, keys, indexBy, xAxis, yAxis, values, maxTicks }) => {
           margin={MARGIN}
           padding={0.7}
           colors={colors}
-          groupMode="stacked"
+          groupMode='stacked'
           borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
           axisTop={null}
           axisRight={null}
@@ -115,8 +115,8 @@ const BarChart = ({ data, keys, indexBy, xAxis, yAxis, values, maxTicks }) => {
                   id,
 
                   label: id,
-                  color: colors[id],
-                };
+                  color: colors[id]
+                }
               }),
               dataFrom: 'keys',
               anchor: 'top-right',
@@ -136,11 +136,11 @@ const BarChart = ({ data, keys, indexBy, xAxis, yAxis, values, maxTicks }) => {
                   on: 'hover',
                   style: {
                     itemTextColor: '#000',
-                    itemBackground: '#eee',
-                  },
-                },
-              ],
-            },
+                    itemBackground: '#eee'
+                  }
+                }
+              ]
+            }
           ]}
           enableLabel={false}
           labelSkipWidth={6}
@@ -152,11 +152,11 @@ const BarChart = ({ data, keys, indexBy, xAxis, yAxis, values, maxTicks }) => {
           layers={['grid', 'bars', 'markers', 'axes', customLegend]}
         />
       </div>
-    );
+    )
   }
 
-  return <Loader />;
-};
+  return <Loader />
+}
 
 BarChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -165,12 +165,12 @@ BarChart.propTypes = {
   xAxis: PropTypes.string.isRequired,
   yAxis: PropTypes.string.isRequired,
   values: PropTypes.arrayOf(PropTypes.string),
-  maxTicks: PropTypes.number,
-};
+  maxTicks: PropTypes.number
+}
 
 BarChart.defaultProps = {
   values: [],
-  maxTicks: 0,
-};
+  maxTicks: 0
+}
 
-export default BarChart;
+export default BarChart

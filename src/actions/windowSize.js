@@ -1,9 +1,9 @@
-import { UPDATE_WINDOW_SIZE } from '../types';
+import { UPDATE_WINDOW_SIZE } from '../types'
 
 const updateWindowSize = (windowSize) => (dispatch) =>
   dispatch({
     type: UPDATE_WINDOW_SIZE,
-    windowSize,
-  });
+    windowSize
+  })
 
-export default updateWindowSize;
+export default updateWindowSize

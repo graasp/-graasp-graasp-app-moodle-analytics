@@ -1,5 +1,5 @@
 {
-  "name": "@graasp/graasp-app-moodle-analytics-example",
+  "name": "@graasp/moodle-example",
   "homepage": ".",
   "version": "0.0.0",
   "private": true,
@@ -13,7 +13,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "@graasp/graasp-app-moodle-analytics": "link:..",
+    "@graasp/moodle": "link:..",
     "@material-ui/core": "4.11.0",
     "@material-ui/icons": "4.9.1",
     "eslint": "link:../node_modules/eslint",

@@ -1,13 +1,13 @@
-import { UPDATE_CHART_DATE_BY_ID } from '../types';
+import { UPDATE_CHART_DATE_BY_ID } from '../types'
 
 const updateDateById = (from, to, id) => (dispatch) =>
   dispatch({
     type: UPDATE_CHART_DATE_BY_ID,
     payload: {
       from,
-      to,
+      to
     },
-    key: id,
-  });
+    key: id
+  })
 
-export default updateDateById;
+export default updateDateById

@@ -1,11 +1,11 @@
-import { GET_CONTEXT_FAILED, GET_CONTEXT_SUCCEEDED } from '../types';
+import { GET_CONTEXT_FAILED, GET_CONTEXT_SUCCEEDED } from '../types'
 import {
   DEFAULT_API_HOST,
   DEFAULT_LANG,
-  DEFAULT_MODE,
-} from '../config/settings';
-import { showErrorToast } from '../utils/toasts';
-import { DEFAULT_VIEW } from '../config/views';
+  DEFAULT_MODE
+} from '../config/settings'
+import { showErrorToast } from '../utils/toasts'
+import { DEFAULT_VIEW } from '../config/views'
 
 const INITIAL_STATE = {
   apiHost: DEFAULT_API_HOST,
@@ -23,23 +23,23 @@ const INITIAL_STATE = {
   reviewing: false,
   standalone: false,
   analytics: false,
-  tool: false,
-};
+  tool: false
+}
 
 export default (state = INITIAL_STATE, { type, payload }) => {
   switch (type) {
     case GET_CONTEXT_SUCCEEDED:
       return {
         ...state,
-        ...payload,
-      };
+        ...payload
+      }
 
     case GET_CONTEXT_FAILED:
       // show error to user
-      showErrorToast(payload);
-      return state;
+      showErrorToast(payload)
+      return state
 
     default:
-      return state;
+      return state
   }
-};
+}
