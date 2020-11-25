@@ -16,7 +16,6 @@ npm install --save @graasp/graasp-app-moodle-analytics
 import React, { Component } from 'react'
 
 import MyComponent from '@graasp/graasp-app-moodle-analytics'
-import '@graasp/graasp-app-moodle-analytics/dist/index.css'
 
 class Example extends Component {
   render() {

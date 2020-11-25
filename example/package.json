@@ -4,19 +4,29 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ../node_modules/react-scripts/bin/react-scripts.js start",
-    "build": "node ../node_modules/react-scripts/bin/react-scripts.js build",
-    "test": "node ../node_modules/react-scripts/bin/react-scripts.js test",
-    "eject": "node ../node_modules/react-scripts/bin/react-scripts.js eject"
+    "start": "npm-run-all --parallel start:local start:api",
+    "start:local": "env-cmd -f ./.env.local react-scripts start",
+    "start:api": "json-server --watch data/db.json --port 3636 --id _id --routes data/routes.json",
+    "prestart:api": "cat data/default.json > data/db.json",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "dependencies": {
-    "react": "link:../node_modules/react",
-    "react-dom": "link:../node_modules/react-dom",
-    "react-scripts": "link:../node_modules/react-scripts",
-    "@graasp/graasp-app-moodle-analytics": "link:.."
+    "@graasp/graasp-app-moodle-analytics": "link:..",
+    "@material-ui/core": "4.11.0",
+    "@material-ui/icons": "4.9.1",
+    "eslint": "link:../node_modules/eslint",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "^4.0.1",
+    "redux": "4.0.5"
   },
   "devDependencies": {
-    "@babel/plugin-syntax-object-rest-spread": "^7.8.3"
+    "@babel/plugin-syntax-object-rest-spread": "^7.8.3",
+    "env-cmd": "^10.1.0",
+    "json-server": "^0.16.3",
+    "npm-run-all": "^4.1.5"
   },
   "eslintConfig": {
     "extends": "react-app"
