@@ -1,12 +1,11 @@
 {
   "name": "@graasp/moodle",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "Components for connecting Graasp with Moodle.",
   "author": "graasp",
   "contributors": [
     "Juan Carlos Farah",
-    "Hassan Abdul Ghaffar",
-    "Mashkour Abdel Aziz",
+    "Kim Lan Phan Hoang",
     "Roland Salloum",
     "Hady Khairallah"
   ],
@@ -30,7 +29,9 @@
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
     "predeploy": "cd example && yarn install && yarn run build",
-    "deploy": "gh-pages -d example/build"
+    "deploy": "gh-pages -d example/build",
+    "version": "git fetch --tags && git add CHANGELOG.md && standard-version -a",
+    "version:first": "git fetch --tags && git add CHANGELOG.md && standard-version -a --first-release"
   },
   "peerDependencies": {
     "@material-ui/core": "4.11.0",
@@ -67,22 +68,23 @@
   "devDependencies": {
     "@commitlint/cli": "9.1.1",
     "@commitlint/config-conventional": "9.1.1",
-    "babel-eslint": "^10.0.3",
+    "babel-eslint": "10.0.3",
     "codacy-coverage": "3.4.0",
-    "cross-env": "^7.0.2",
+    "cross-env": "7.0.2",
     "eslint-config-airbnb": "18.2.1",
     "eslint-config-prettier": "6.15.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsx-a11y": "6.4.1",
     "eslint-plugin-react": "7.21.5",
-    "gh-pages": "^2.2.0",
+    "gh-pages": "2.2.0",
     "glob": "7.1.6",
     "husky": "4.2.5",
     "json-server": "0.16.1",
-    "microbundle-crl": "^0.13.10",
-    "npm-run-all": "^4.1.5",
-    "prettier": "^2.0.4",
-    "pretty-quick": "2.0.1"
+    "microbundle-crl": "0.13.10",
+    "npm-run-all": "4.1.5",
+    "prettier": "2.0.4",
+    "pretty-quick": "2.0.1",
+    "standard-version": "9.0.0"
   },
   "files": [
     "dist"
