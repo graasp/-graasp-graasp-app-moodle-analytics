@@ -1,33 +1,58 @@
 {
-  "parser": "babel-eslint",
   "extends": [
-    "standard",
-    "standard-react",
-    "plugin:prettier/recommended",
-    "prettier/standard",
-    "prettier/react"
+    "airbnb",
+    "prettier"
+  ],
+  "plugins": [
+    "import",
+    "jsx-a11y",
+    "react"
   ],
   "env": {
-    "node": true
+    "browser": true,
+    "node": true,
+    "mocha": true,
+    "jest": true
   },
-  "parserOptions": {
-    "ecmaVersion": 2020,
-    "ecmaFeatures": {
-      "legacyDecorators": true,
-      "jsx": true
-    }
+  "globals": {
+    "cy": true,
+    "Cypress": true
   },
-  "settings": {
-    "react": {
-      "version": "16"
-    }
-  },
+  "parser": "babel-eslint",
   "rules": {
-    "space-before-function-paren": 0,
-    "react/prop-types": 0,
-    "react/jsx-handler-names": 0,
-    "react/jsx-fragments": 0,
-    "react/no-unused-prop-types": 0,
-    "import/export": 0
+    "import/no-unresolved":false,
+    "no-underscore-dangle": [
+      "error",
+      {
+        "allow": [
+          "_id",
+          "__REDUX_DEVTOOLS_EXTENSION__"
+        ]
+      }
+    ],
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["to", "hrefLeft", "hrefRight"],
+        "aspects": ["noHref", "invalidHref", "preferButton"]
+      }
+    ],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx"]
+      }
+    ],
+    "import/no-named-as-default": 0,
+    "react/static-property-placement": ["error", "property assignment", {
+      "childContextTypes": "static public field",
+      "contextTypes": "static public field",
+      "contextType": "static public field",
+      "defaultProps": "static public field",
+      "displayName": "static public field",
+      "propTypes": "static public field"
+    }],
+    "react/state-in-constructor": ["error", "never"]
   }
 }

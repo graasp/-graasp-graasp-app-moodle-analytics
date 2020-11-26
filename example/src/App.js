@@ -1,10 +1,9 @@
 import React from 'react'
 
-import { ExampleComponent } from '@graasp/graasp-app-moodle-analytics'
-import '@graasp/graasp-app-moodle-analytics/dist/index.css'
+import { Analytics } from '@graasp/moodle'
 
 const App = () => {
-  return <ExampleComponent text="Create React Library Example 😄" />
+  return <Analytics />
 }
 
 export default App

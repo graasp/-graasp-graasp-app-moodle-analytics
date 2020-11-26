@@ -1,6 +1,6 @@
 {
-  "short_name": "@graasp/graasp-app-moodle-analytics",
-  "name": "@graasp/graasp-app-moodle-analytics",
+  "short_name": "@graasp/moodle",
+  "name": "@graasp/moodle",
   "icons": [
     {
       "src": "favicon.ico",

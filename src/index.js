@@ -1,6 +1,19 @@
 import React from 'react'
-import styles from './styles.module.css'
+import { Provider } from 'react-redux'
+import Root from './components/Root'
+import configureStore from './store/configureStore'
+import './index.css'
 
-export const ExampleComponent = ({ text }) => {
-  return <div className={styles.test}>Example Component: {text}</div>
+const renderApp = (RootComponent, store, history, context) => {
+  return (
+    <Provider store={store}>
+      <RootComponent context={context} />
+    </Provider>
+  )
+}
+
+// eslint-disable-next-line import/prefer-default-export
+export const Analytics = ({ context }) => {
+  const { store, history } = configureStore()
+  return renderApp(Root, store, history, context)
 }

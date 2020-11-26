@@ -1,13 +1,13 @@
-# @graasp/graasp-app-moodle-analytics
+# @graasp/moodle
 
 > 
 
-[![NPM](https://img.shields.io/npm/v/@graasp/graasp-app-moodle-analytics.svg)](https://www.npmjs.com/package/@graasp/graasp-app-moodle-analytics) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/@graasp/moodle.svg)](https://www.npmjs.com/package/@graasp/moodle) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
 ```bash
-npm install --save @graasp/graasp-app-moodle-analytics
+npm install --save @graasp/moodle
 ```
 
 ## Usage
@@ -15,12 +15,11 @@ npm install --save @graasp/graasp-app-moodle-analytics
 ```jsx
 import React, { Component } from 'react'
 
-import MyComponent from '@graasp/graasp-app-moodle-analytics'
-import '@graasp/graasp-app-moodle-analytics/dist/index.css'
+import { Analytics } from '@graasp/moodle'
 
 class Example extends Component {
   render() {
-    return <MyComponent />
+    return <Analytics context={...} />
   }
 }
 ```
