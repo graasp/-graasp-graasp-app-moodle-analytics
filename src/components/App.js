@@ -48,8 +48,18 @@ export class App extends Component {
     this.handleChangeLang(lang)
   }
 
-  componentDidUpdate({ lang: prevLang, appInstanceId: prevAppInstanceId }) {
-    const { lang, appInstanceId, dispatchGetAppInstance } = this.props
+  componentDidUpdate({
+    lang: prevLang,
+    appInstanceId: prevAppInstanceId,
+    context: prevContext
+  }) {
+    const {
+      lang,
+      appInstanceId,
+      dispatchGetAppInstance,
+      context,
+      dispatchGetContext
+    } = this.props
     // handle a change of language
     if (lang !== prevLang) {
       this.handleChangeLang(lang)
@@ -57,6 +67,10 @@ export class App extends Component {
     // handle receiving the app instance id
     if (appInstanceId !== prevAppInstanceId) {
       dispatchGetAppInstance()
+    }
+
+    if (context !== prevContext) {
+      dispatchGetContext(context)
     }
   }
 
