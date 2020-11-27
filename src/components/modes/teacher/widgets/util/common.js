@@ -259,7 +259,7 @@ export const chunkData = (defaultValues, data, maxChartNb) => {
 }
 
 export const getUniqueVerbs = (content) => {
-  return [...new Set(content.map(({ action }) => action))].sort()
+  return Array.from(new Set(content.map(({ action }) => action))).sort()
 }
 
 export const getColorForScheme = (t, values) => {
