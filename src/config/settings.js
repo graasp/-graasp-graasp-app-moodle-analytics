@@ -27,12 +27,14 @@ export const DATE_FORMAT_SHORT_YEAR = 'DD/MM/YY'
 export const DATE_FORMAT_FULL_YEAR = 'DD/MM/YYYY'
 
 export const TICK_NUMBER_FOR_TIME_PERIOD = {
-  FULLSCREEN: [4, 7, 10],
+  FULLSCREEN: [2, 4, 7, 10],
   HALFSCREEN: [2, 3, 4]
 }
 
 export const TICK_NUMBER_FOR_DATE_FULL_YEAR = [2, 4, 8]
 
-export const SCREEN_SIZE_RANGE = [750, 1200, 1920]
+export const SCREEN_SIZE_RANGE = [400, 500, 1000, 1920]
 
 export const VERB_BAR_CHART_MAX_CHART_NUMBER = 16
+
+export const DATE_SEPARATOR = '-'

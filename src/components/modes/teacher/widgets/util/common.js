@@ -1,7 +1,10 @@
 import moment from 'moment'
 import _ from 'lodash'
 import { interpolateSpectral } from 'd3-scale-chromatic'
-import { DATE_FORMAT_SHORT_YEAR } from '../../../../../config/settings'
+import {
+  DATE_FORMAT_SHORT_YEAR,
+  DATE_SEPARATOR
+} from '../../../../../config/settings'
 import getComponentById from '../../../../../reducers/chartDataById'
 
 export const DateOfCreation = (creationData) => {
@@ -210,7 +213,13 @@ export const combineContents = (listOfContent) => {
 }
 
 export const formatChunkDate = (group) =>
-  group.length > 1 ? `${group[0]} - ${group[group.length - 1]}` : group[0]
+  group.length > 1
+    ? `${group[0]}${DATE_SEPARATOR}${group[group.length - 1]}`
+    : group[0]
+
+export const dateAreChunked = (dates) => {
+  return dates?.[0]?.includes(DATE_SEPARATOR)
+}
 
 // compute ideal nb of chunk from data
 export const getChunkNb = (data, maxChartNb) => {

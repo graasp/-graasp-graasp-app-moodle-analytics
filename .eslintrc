@@ -20,7 +20,7 @@
   },
   "parser": "babel-eslint",
   "rules": {
-    "import/no-unresolved":false,
+    "import/no-unresolved":"off",
     "no-underscore-dangle": [
       "error",
       {

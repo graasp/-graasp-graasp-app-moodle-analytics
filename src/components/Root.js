@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react'
+import React, { createRef, useLayoutEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import ReactGa from 'react-ga'
@@ -62,9 +62,10 @@ const theme = createMuiTheme({
 
 const Root = ({ classes, context }) => {
   const dispatch = useDispatch()
+  const appRef = createRef()
 
   function updateSize() {
-    const width = window.innerWidth
+    const width = appRef.current.offsetWidth
     dispatch(updateWindowSize(width))
   }
 
@@ -75,7 +76,7 @@ const Root = ({ classes, context }) => {
   })
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} ref={appRef}>
       <MuiThemeProvider theme={theme}>
         <I18nextProvider i18n={i18nConfig}>
           <App context={context} />
