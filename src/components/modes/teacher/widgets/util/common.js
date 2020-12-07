@@ -217,7 +217,7 @@ export const formatChunkDate = (group) =>
     ? `${group[0]}${DATE_SEPARATOR}${group[group.length - 1]}`
     : group[0]
 
-export const dateAreChunked = (dates) => {
+export const datesAreChunked = (dates) => {
   return dates?.[0]?.includes(DATE_SEPARATOR)
 }
 

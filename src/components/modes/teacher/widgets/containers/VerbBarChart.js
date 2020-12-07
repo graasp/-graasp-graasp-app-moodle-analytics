@@ -13,7 +13,7 @@ import {
   changeDateFormatForBarChart,
   chunkData,
   getUniqueVerbs,
-  dateAreChunked
+  datesAreChunked
 } from '../util'
 import { DATE, VERB_BAR_CHART_DAY_PICKER_ID_PER_TIME } from '../types'
 import {
@@ -52,7 +52,7 @@ const mapStateToProps = ({
   )
 
   // divide by 2 because dates are twice as big
-  const tickRange = dateAreChunked(values)
+  const tickRange = datesAreChunked(values)
     ? TICK_NUMBER_FOR_TIME_PERIOD.FULLSCREEN.map((x) => Math.ceil(x / 2.0))
     : TICK_NUMBER_FOR_TIME_PERIOD.FULLSCREEN
 
