@@ -1,6 +1,6 @@
 {
   "name": "@graasp/moodle",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Components for connecting Graasp with Moodle.",
   "author": "graasp",
   "contributors": [
