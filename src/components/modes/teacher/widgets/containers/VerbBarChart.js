@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import _ from 'lodash'
 import BarChart from '../components/BarChart'
 import {
   buildDateRange,
@@ -11,7 +12,8 @@ import {
   nbOfTicks,
   changeDateFormatForBarChart,
   chunkData,
-  getUniqueVerbs
+  getUniqueVerbs,
+  datesAreChunked
 } from '../util'
 import { DATE, VERB_BAR_CHART_DAY_PICKER_ID_PER_TIME } from '../types'
 import {
@@ -24,13 +26,14 @@ const xAxis = DATE
 const yAxis = 'Occurrence'
 
 const VerbBarChart = (data, from, to) => {
+  let myData = _.cloneDeep(data)
   const dateRange = buildDateRange(from, to)
-  const allowedVerbs = getUniqueVerbs(data)
+  const allowedVerbs = getUniqueVerbs(myData)
   const formattedData = createDataForBarChart(dateRange, allowedVerbs, [DATE])
-  data = fillDataForBarChart(data, formattedData)
-  data = changeDateFormatForBarChart(data)
-  data = chunkData({}, data, VERB_BAR_CHART_MAX_CHART_NUMBER)
-  return data
+  myData = fillDataForBarChart(myData, formattedData)
+  myData = changeDateFormatForBarChart(myData)
+  myData = chunkData({}, myData, VERB_BAR_CHART_MAX_CHART_NUMBER)
+  return myData
 }
 
 const mapStateToProps = ({
@@ -39,6 +42,19 @@ const mapStateToProps = ({
   windowSize: { windowSize }
 }) => {
   const data = combineContents(content)
+
+  const values = formatDates(
+    buildDateRange(
+      fromDate(chartDataById, VERB_BAR_CHART_DAY_PICKER_ID_PER_TIME),
+      toDate(chartDataById, VERB_BAR_CHART_DAY_PICKER_ID_PER_TIME)
+    ),
+    VERB_BAR_CHART_MAX_CHART_NUMBER
+  )
+
+  // divide by 2 because dates are twice as big
+  const tickRange = datesAreChunked(values)
+    ? TICK_NUMBER_FOR_TIME_PERIOD.FULLSCREEN.map((x) => Math.ceil(x / 2.0))
+    : TICK_NUMBER_FOR_TIME_PERIOD.FULLSCREEN
 
   return {
     data: VerbBarChart(
@@ -50,18 +66,8 @@ const mapStateToProps = ({
     indexBy: DATE,
     xAxis,
     yAxis,
-    values: formatDates(
-      buildDateRange(
-        fromDate(chartDataById, VERB_BAR_CHART_DAY_PICKER_ID_PER_TIME),
-        toDate(chartDataById, VERB_BAR_CHART_DAY_PICKER_ID_PER_TIME)
-      ),
-      VERB_BAR_CHART_MAX_CHART_NUMBER
-    ),
-    maxTicks: nbOfTicks(
-      TICK_NUMBER_FOR_TIME_PERIOD.FULLSCREEN,
-      SCREEN_SIZE_RANGE,
-      windowSize
-    )
+    values,
+    maxTicks: nbOfTicks(tickRange, SCREEN_SIZE_RANGE, windowSize)
   }
 }
 
